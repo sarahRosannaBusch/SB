@@ -1,0 +1,2 @@
+# SB
+Simple SPA framework
