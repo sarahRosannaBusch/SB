@@ -18,10 +18,22 @@ var SB = (function(){
             return parent.querySelectorAll(query);
         }
 
-        that.spawn = function(parentElem, childType) {
+        that.spawn = function(parentElem, childType, id) {
             var child = document.createElement(childType);
+            if(id !== undefined) {
+                child.id = id;
+            }
             parentElem.appendChild(child);
             return child;
+        }
+
+        that.empty = function(elem) {
+            if(elem.hasChildNodes) {
+                var numChildren = elem.childNodes.length;
+                for(var i = numChildren - 1; i >= 0; i--) {
+                    elem.removeChild(elem.childNodes[i]);
+                }
+            }
         }
 
         return that;
