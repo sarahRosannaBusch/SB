@@ -28,8 +28,12 @@ const server = new http.createServer(function (req, res) {
                 res.writeHead(404, {'Content-Type': 'text'});
                 return res.end("404 File Not Found: " + filename);
             }
-            var mimeType = filename.match(/(?:html|js|css)$/i);
-            mimeType =  mimeType ? 'text/' + mimeType : 'text/plain';
+            var mimeType = filename.match(/(?:html|js|css|svg)$/i);
+            if(mimeType && mimeType[0] === 'svg') {
+                mimeType = 'image/svg+xml';
+            } else {
+                mimeType =  mimeType ? 'text/' + mimeType : 'text/plain';
+            }
             
             console.log('serving: ' + filename);
             res.writeHead(200, {'Content-Type': mimeType });
